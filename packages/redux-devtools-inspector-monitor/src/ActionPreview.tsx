@@ -152,12 +152,31 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
     );
   }
 
+  findDataByPath(action: { [k: string]: any }, paths: Array<string | number>): { [k: string]: any } {
+    return paths.reduce((reduced: { [k: string]: any }, attr: string | number): any => {
+      if (reduced) {
+        return reduced[attr];
+      }
+      return null;
+    }, action);
+  }
+
+  copyHandler(action: { [k: string]: any }, [key, ...rest]: (string | number)[]) {
+    const pathTofind: (string | number)[] = [key, ...rest].reverse();
+    const found: { [k: string]: any } = this.findDataByPath(action, pathTofind);
+    let foundWithKey: { [k: string]: any } = {};
+    foundWithKey[key] = found;
+
+    const outputToClipboard: string = JSON.stringify(foundWithKey, (k, v) => v === undefined ? 'undefined' : v);
+    navigator.clipboard.writeText(outputToClipboard);
+  }
+
   labelRenderer = (
     [key, ...rest]: (string | number)[],
     nodeType: string,
     expanded: boolean
   ) => {
-    const { styling, onInspectPath, inspectedPath } = this.props;
+    const { styling, onInspectPath, inspectedPath, action } = this.props;
 
     return (
       <span>
@@ -173,6 +192,9 @@ class ActionPreview<S, A extends Action<unknown>> extends Component<
         >
           {'(pin)'}
         </span>
+        <span
+          onClick={() => this.copyHandler(action, [key, ...rest])}
+        >{'📋 '}</span>
         {!expanded && ': '}
       </span>
     );
