@@ -37,8 +37,11 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@redux-devtools/core": "npm:redux-devtools@^3.7.0",
+    "@redux-devtools/dock-monitor": "npm:redux-devtools-dock-monitor@^1.2.0",
     "@types/dragula": "^3.7.0",
     "@types/prop-types": "^15.7.3",
+    "@types/react-json-tree": "^0.6.11",
     "dateformat": "^3.0.3",
     "hex-rgba": "^1.0.2",
     "javascript-stringify": "^2.0.1",
@@ -53,8 +56,6 @@
     "redux-devtools-themes": "^1.0.0"
   },
   "devDependencies": {
-    "@redux-devtools/core": "^3.7.0",
-    "@redux-devtools/dock-monitor": "^1.2.0",
     "@types/dateformat": "^3.0.1",
     "@types/hex-rgba": "^1.0.0",
     "@types/history": "^4.7.7",
@@ -63,6 +64,7 @@
     "@types/react-dragula": "^1.1.0",
     "@types/react-router": "^5.1.8",
     "@types/redux-logger": "^3.0.8",
+    "babel-plugin-module-resolver": "^4.1.0",
     "base16": "^1.0.0",
     "connected-react-router": "^6.8.0",
     "history": "^4.10.1",
@@ -78,7 +80,7 @@
     "seamless-immutable": "^7.1.4"
   },
   "peerDependencies": {
-    "@redux-devtools/core": "^3.7.0",
+    "@redux-devtools/core": "npm:redux-devtools@^3.7.0",
     "@types/react": "^16.3.18",
     "react": "^16.3.0",
     "redux": "^3.4.0 || ^4.0.0"
